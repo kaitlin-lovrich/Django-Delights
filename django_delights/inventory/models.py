@@ -26,7 +26,7 @@ class Ingredient(models.Model):
         return '/ingredient/list'
     
     def __str__(self):
-        return f'{self.quantity} {self.unit} {self.name} ${self.unit_price}'
+        return f'{self.unit} {self.name}'
 
 class RecipeRequirement(models.Model):
     # Represents an ingredient required for a recipe from the menu

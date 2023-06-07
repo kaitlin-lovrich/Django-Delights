@@ -24,7 +24,7 @@
 				</tr>
 			</thead>
 			<tbody>
-			{% for ingredient in ingredient_list %}
+			{% for ingredient in ingredients %}
 				<tr>
 					<td>{{ ingredient.quantity|stringformat:'.0f' }}</td>
 					<td>{{ ingredient.unit|title }}</td>
@@ -41,7 +41,7 @@
 	<div>
 		<table>
 			<thead>
-			{% for menu_item in object_list %}
+			{% for menu_item in menu_items %}
 				<tr>
 					<th>{{ menu_item.title }} ${{ menu_item.price|stringformat:'.2f' }}</th>
 				</tr>
@@ -69,7 +69,7 @@
 				</tr>
 			</thead>
 			<tbody>
-			{% for purchase in object_list %}
+			{% for purchase in purchases %}
 				<tr>
 					<td>{{ purchase.timestamp }}</td>
 					<td>{{ purchase.menu_item.title }}</td>
