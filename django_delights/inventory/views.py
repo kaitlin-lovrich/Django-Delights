@@ -2,12 +2,21 @@ from django.shortcuts import render
 from .models import MenuItem, Ingredient, RecipeRequirement, Purchase
 from .forms import MenuItemForm, IngredientForm, RecipeRequirementForm, PurchaseForm
 from django.views.generic import ListView, TemplateView
+#from django.views.generic.base import TemplateView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 
 
-def home(request):
-    return render(request, 'inventory/home.html')
-
+class home(TemplateView):
+    template_name = 'inventory/home.html'
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['menu_items'] = MenuItem.objects.all()
+        context['ingredients'] = Ingredient.objects.all()
+        context['recipe_requirements'] = RecipeRequirement.objects.all()
+        context['purchases'] = Purchase.objects.all()
+        return context
+        
 # MenuItem views
 class MenuItemList(ListView):
     model = MenuItem
