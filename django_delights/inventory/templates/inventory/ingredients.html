@@ -1,0 +1,39 @@
+{% extends 'inventory/base.html' %}
+
+{%load static %}
+
+{% block head %}
+<link rel='stylesheet' href='{% static "inventory/file.css" %}'>
+{% endblock %}
+
+
+{% block content %}
+
+	<h2>Ingredients</h2>
+
+	<a href='{% url "add-ingredient" %}'><button>Add Ingredient</button></a>
+
+	<table>
+		<thead>
+			<tr>
+				<th>Quantity</th>
+				<th>Unit</th>
+				<th>Name</th>
+				<th>Unit Price</th>
+			</tr>
+		</thead>
+		<tbody>
+		{% for ingredient in ingredient_list %}
+			<tr>
+				<td>{{ ingredient.quantity|stringformat:'.0f' }}</td>
+				<td>{{ ingredient.unit|title }}</td>
+				<td>{{ ingredient.name|title }}</td>
+				<td>${{ ingredient.unit_price|stringformat:'.2f' }}</td>
+				<td><a href='{% url "edit-ingredient" ingredient.id %}'><button>Edit</button></a></td>
+				<td><a href='{% url "delete-ingredient" ingredient.id %}'><button>Delete</button></a></td>
+			</tr>
+		{% endfor %}
+		</tbody>
+	</table>
+	
+{% endblock %}

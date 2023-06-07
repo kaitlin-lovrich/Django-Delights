@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        {% load static %}
+        
+        {% block head %}
+        {% endblock %}
+    </head>
+
+    <body>
+    
+        <header>
+            <nav class='topnav' id='page-topnav'>
+                <a href='{% url "home" %}' class='active'>Home</a>
+                <a href='{% url "menu-list" %}'>Menu</a>
+                <a href='{% url "ingredient-list" %}'>Ingredients</a>
+                <a href='{% url "purchase-list" %}'>Purchases</a>
+            </nav>
+        </header>
+        
+        <main>
+            <h1>Django Delights</h1>
+            {% block content %}
+            {% endblock %}
+        </main>
+        
+    </body>
+</html>
