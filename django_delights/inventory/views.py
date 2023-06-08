@@ -2,6 +2,7 @@ from django.shortcuts import render
 from .models import MenuItem, Ingredient, RecipeRequirement, Purchase
 from .forms import MenuItemForm, IngredientForm, RecipeRequirementForm, PurchaseForm
 from django.views.generic import ListView, TemplateView
+#from django.views.generic.base import TemplateView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 
 
