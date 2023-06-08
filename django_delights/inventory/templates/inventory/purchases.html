@@ -1,0 +1,37 @@
+{% extends 'inventory/base.html' %}
+
+{%load static %}
+
+{% block head %}
+<link rel='stylesheet' href='{% static "inventory/file.css" %}'>
+{% endblock %}
+
+
+{% block content %}
+
+	<h2>Purchases</h2>
+
+	<a href='{% url "add-purchase" %}'><button>Add New Purchase</button></a>
+
+	<table>
+		<thead>
+			<tr>
+				<th>Time Stamp</th>
+				<th>Menu Item</th>
+				<th>Price</th>
+			</tr>
+		</thead>
+		<tbody>
+		{% for purchase in purchase_list %}
+			<tr>
+				<td>{{ purchase.timestamp }}</td>
+				<td>{{ purchase.menu_item.title }}</td>
+				<td>${{ purchase.menu_item.price|stringformat:'.2f' }}</td>
+				<td><a href='{% url "edit-purchase" purchase.id %}'><button>Edit</button></a></td>
+				<td><a href='{% url "delete-purchase" purchase.id %}'><button>Delete</button></a></td>
+			</tr>
+		{% endfor %}
+		</tbody>
+	</table>
+	
+{% endblock %}

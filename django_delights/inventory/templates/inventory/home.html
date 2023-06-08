@@ -1,0 +1,83 @@
+{% extends 'inventory/base.html' %}
+
+{%load static %}
+
+{% block head %}
+<link rel='stylesheet' href='{% static "inventory/file.css" %}'>
+{% endblock %}
+
+
+{% block content %}
+
+	<p>Welcome, {{ user }}</p>
+	
+	<h2>Ingredients</h2>
+	
+	<div>
+		<table>
+			<thead>
+				<tr>
+					<th>Quantity</th>
+					<th>Unit</th>
+					<th>Name</th>
+					<th>Unit Price</th>
+				</tr>
+			</thead>
+			<tbody>
+			{% for ingredient in ingredients %}
+				<tr>
+					<td>{{ ingredient.quantity|stringformat:'.0f' }}</td>
+					<td>{{ ingredient.unit|title }}</td>
+					<td>{{ ingredient.name|title }}</td>
+					<td>${{ ingredient.unit_price|stringformat:'.2f' }}</td>
+				</tr>
+			{% endfor %}
+			</tbody>
+		</table>
+	</div>
+	
+	<h2>Menu</h2>
+	
+	<div>
+		<table>
+			<thead>
+			{% for menu_item in menu_items %}
+				<tr>
+					<th>{{ menu_item.title }} ${{ menu_item.price|stringformat:'.2f' }}</th>
+				</tr>
+			</thead>
+			<tbody>
+			{% for recipe_requirement in menu_item.reciperequirement_set.all %}
+				<tr>
+					<td>{{ recipe_requirement.ingredient.quantity|stringformat:'.0f' }} {{ recipe_requirement.ingredient.unit|title }} {{ recipe_requirement.ingredient.name|title }}</td>
+				</tr>
+			{% endfor %}
+			</tbody>	
+			{% endfor %}
+		</table>
+	</div>
+	
+	<h2>Purchases</h2>
+	
+	<div>
+		<table>
+			<thead>
+				<tr>
+					<th>Timestamp</th>
+					<th>Menu Item</th>
+					<th>Price</th>
+				</tr>
+			</thead>
+			<tbody>
+			{% for purchase in purchases %}
+				<tr>
+					<td>{{ purchase.timestamp }}</td>
+					<td>{{ purchase.menu_item.title }}</td>
+					<td>${{ purchase.menu_item.price|stringformat:'.2f' }}</td>
+				</tr>
+			{% endfor %}
+			</tbody>
+		</table>
+	</div>
+	
+{% endblock %}
